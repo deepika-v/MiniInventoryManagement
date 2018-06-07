@@ -14,13 +14,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Add Manufacturer</a>
+                        <a href="logic/manufacturer.php">Add Manufacturer</a>
                     </li>
                     <li>
-                        <a href="#">Add Model</a>
+                        <a href="logic/model.php">Add Model</a>
                     </li>
                     <li>
-                        <a href="#">View Inventory</a>
+                        <a href="logic/inventory.php">View Inventory</a>
                     </li>
                 </ul>
             </div>
