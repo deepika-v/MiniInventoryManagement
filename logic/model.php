@@ -17,6 +17,23 @@
                     </div>
                 </div>
                 <!-- /.row -->
+                 <?php 
+
+                if($database->connection)
+                  echo "connected";
+                else
+                  echo "not connected";
+
+                $model = new Model();
+                $result_set = $model->get_all_model_list();
+                if(!empty($result_set))
+                  $results = $database->fetch_array($result_set);
+                else
+                  $results = '';
+                
+
+                
+                ?>
 
 
 <div class="row">
@@ -39,7 +56,28 @@
                     <th>Delete</th>
                    </thead>
     <tbody>
-    
+     <?php 
+        if(!empty($results))
+                               
+                {
+                  echo '<tr>
+                        <td><input type="checkbox" class="checkthis" /></td>
+    <td>'.$results['model_id'].'</td>
+    <td>'.$results['model_name'].'</td>
+    <td>'.$results['created_on'].'</td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+    </tr>';
+                }
+                else
+                {
+
+                  echo '<tr>
+                        <td colspan = "5">No record exists</td>
+    </tr>';
+                }
+
+     ?>
     <tr>
     <td><input type="checkbox" class="checkthis" /></td>
     <td>Mohsin</td>
