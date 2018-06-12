@@ -6,7 +6,20 @@
 
         <div id="page-wrapper"  style="width: 95%">
             <div class="container-fluid">
+                <?php 
 
+                if($database->connection)
+                  echo "connected";
+                else
+                  echo "not connected";
+
+                $manufacturer = new Manufacturer();
+                $result_set = $manufacturer->get_all_manufacturers_list();
+                $results = $database->fetch_array($result_set);
+                
+
+                
+                ?>
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -39,15 +52,22 @@
                     <th>Delete</th>
                    </thead>
     <tbody>
-    
-    <tr>
-    <td><input type="checkbox" class="checkthis" /></td>
-    <td>Mohsin</td>
-    <td>Irshad</td>
-    <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
+     <?php 
+        if(!empty($results))
+                               
+                {
+                  echo '<tr>
+                        <td><input type="checkbox" class="checkthis" /></td>
+    <td>'.$results['manufacturer_id'].'</td>
+    <td>'.$results['manufacturer_name'].'</td>
+    <td>'.$results['created_on'].'</td>
     <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
     <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-    </tr>
+    </tr>';
+                }
+
+     ?>
+    
     </tbody>
 </table>
 

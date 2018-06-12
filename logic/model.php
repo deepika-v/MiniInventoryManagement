@@ -91,7 +91,7 @@
               <div class="row">
 
                 <div class="col-xs-6 col-md-6 form-group">
-                    <input class="form-control" id="name" name="name" placeholder="Color" type="text" required/>
+                    <input class="form-control" id="name" name="name" placeholder="Color" type="color" required/>
                     </div>
                     <div class="col-xs-6 col-md-6 form-group">
                     <select class="form-control" id="manufacturer_list" placeholder= "Select Manufacturering Year">
