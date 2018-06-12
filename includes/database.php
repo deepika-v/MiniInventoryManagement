@@ -53,7 +53,13 @@ class Database
 
 	public function fetch_array($result)
 	{
-		return mysqli_fetch_array($result);
+		$results = array();
+		while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))	
+		{
+			$results[] = $row;
+		}
+
+		return $results;
 	}
 
 
