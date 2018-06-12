@@ -15,7 +15,10 @@
 
                 $manufacturer = new Manufacturer();
                 $result_set = $manufacturer->get_all_manufacturers_list();
-                $results = $database->fetch_array($result_set);
+                if(!empty($result_set))
+                  $results = $database->fetch_array($result_set);
+                else
+                  $results = '';
                 
 
                 
@@ -63,6 +66,13 @@
     <td>'.$results['created_on'].'</td>
     <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
     <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+    </tr>';
+                }
+                else
+                {
+
+                  echo '<tr>
+                        <td colspan = "5">No record exists</td>
     </tr>';
                 }
 
