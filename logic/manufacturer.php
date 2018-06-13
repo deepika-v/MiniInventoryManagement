@@ -29,33 +29,33 @@
               <table id="mytable" class="table table-bordred table-striped">
  
                    <thead>
-                   
-                   <th><input type="checkbox" id="checkall" /></th>
-                   <th>Id</th>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Created On</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Action</th>                    
                    </thead>
     <tbody>
      <?php 
+                     $database->manufacturer_name = 'Honda';
+                     $database->manufacturer_id = '1';
+                     $create = Manufacturer::update();
+                     if($create)
+                      echo "Record updated Sucessfully";
+                     else
+                      echo "Record  not updated";
 
-                $manufacturer = new Manufacturer();
-                $result_set = $manufacturer->get_all_manufacturers_list();
+                
+                $result_set = Manufacturer::get_all_manufacturers_list();
                 if(!empty($result_set))
-                  $results = $database->fetch_array($result_set);
-                else
-                  $results = '';
-                if(!empty($results))
                   {                  
-                      foreach ($results as $res)
+                      foreach ($result_set as $res)
                       {
                            echo '<tr>
-                                <td>'.$res['manufacturer_id'].'</td>
-                                <td>'.$res['manufacturer_name'].'</td>
-                                <td>'.$res['created_on'].'</td>
-                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                <td>'.$res->manufacturer_id.'</td>
+                                <td>'.$res->manufacturer_name.'</td>
+                                <td>'.$res->created_on.'</td>
+                                <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
                                 </tr>';
                       }
                   }

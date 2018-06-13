@@ -4,6 +4,12 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Database: `mini_inventory`
 --
@@ -41,7 +47,15 @@ CREATE TABLE IF NOT EXISTS `manufacturer` (
   `updated_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`manufacturer_id`),
   KEY `manufacturer_id` (`manufacturer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `manufacturer`
+--
+
+INSERT INTO `manufacturer` (`manufacturer_id`, `manufacturer_name`, `created_on`, `updated_on`) VALUES
+(1, 'honda', '2018-06-12 16:29:21', '2018-06-12 16:29:21'),
+(2, 'tata', '2018-06-12 16:29:21', '2018-06-12 16:29:21');
 
 -- --------------------------------------------------------
 
@@ -57,6 +71,8 @@ CREATE TABLE IF NOT EXISTS `model` (
   `model_color` varchar(255) DEFAULT NULL,
   `model_mf_year` varchar(255) DEFAULT NULL,
   `model_registration_no` varchar(255) DEFAULT NULL,
+  `model_avaliable_count` int(11) NOT NULL DEFAULT '0',
+  `model_sold_count` int(11) NOT NULL DEFAULT '0',
   `model_note` text,
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -80,8 +96,8 @@ ALTER TABLE `file_attachment`
 --
 ALTER TABLE `model`
   ADD CONSTRAINT `model_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturer` (`manufacturer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
 COMMIT;
 
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

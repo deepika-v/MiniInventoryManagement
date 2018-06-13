@@ -28,32 +28,31 @@
               <table id="mytable" class="table table-bordred table-striped">
  
                    <thead>
-                   
-                   <th><input type="checkbox" id="checkall" /></th>
                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Created On</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                   <th>Name</th>
+                   <th>Available Count</th>
+                   <th>Sold Count</th>
+                   <th>Created On</th>
+                   <th>Action</th>
+                    
                    </thead>
     <tbody>
      <?php 
-                $model = new Model();
-                $result_set = $model->get_all_model_list();
-                if(!empty($result_set))
-                  $results = $database->fetch_array($result_set);
-                else
-                  $results = '';
-        if(!empty($results))                               
+                
+                $result_set = Model::get_all_model_list();
+                if(!empty($result_set))                               
                 {
-                  foreach ($results as $res) 
+                  foreach ($result_set as $res) 
                   {
+
                            echo '<tr>
-                                 <td>'.$res['model_id'].'</td>
-                                 <td>'.$res['model_name'].'</td>
-                                 <td>'.$res['created_on'].'</td>
-                                 <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                 <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                 <td>'.$res->model_id.'</td>
+                                 <td>'.$res->model_name.'</td>
+                                 <td>'.$res->model_avaliable_count.'</td>
+                                 <td>'.$res->model_sold_count.'</td>
+                                 <td>'.$res->created_on.'</td>
+                                 <td><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button>
+                                 <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></td>
                                  </tr>';
                   }
          
@@ -85,6 +84,9 @@
             
         </div>
     </div>
+    <?php 
+     $results = Manufacturer::get_all_manufacturers_list();    
+    ?>
 
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
       <div class="modal-dialog">
@@ -101,13 +103,7 @@
                     <div class="col-xs-6 col-md-6 form-group">
                     <select class="form-control" id="manufacturer_list" placeholder= "Select Manufacturer">
                       <option>Select Manufacturer</option>
-                      <?php 
-                        $manufacturer = new Manufacturer();
-                        $result_set = $manufacturer->get_all_manufacturers_list();
-                        if(!empty($result_set))
-                          $results = $database->fetch_array($result_set);
-                        else
-                          $results = '';
+                      <?php
                         if(!empty($results))
                             foreach ($results as $res)
                                echo '<option value = '.$res['manufacturer_id'].'>'.$res['manufacturer_name'].'</option>';
@@ -166,18 +162,52 @@
         <h4 class="modal-title custom_align" id="Heading">Edit Manufacturer Details</h4>
       </div>
           <div class="modal-body">
-          <div class="form-group">
-        <input class="form-control " type="text" placeholder="">
-        </div>
-        <div class="form-group">
-        
-        <input class="form-control " type="text" placeholder="">
-        </div>
-        <div class="form-group">
-        <input class="form-control" type="text" placeholder="" disabled="true">
-    
-        
-        </div>
+         <div class="row">
+                    <div class="col-xs-6 col-md-6 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required autofocus />
+                    </div>
+                    <div class="col-xs-6 col-md-6 form-group">
+                    <select class="form-control" id="manufacturer_list" placeholder= "Select Manufacturer">
+                      <option>Select Manufacturer</option>
+                      <?php
+                        if(!empty($results))
+                            foreach ($results as $res)
+                               echo '<option value = '.$res['manufacturer_id'].'>'.$res['manufacturer_name'].'</option>';
+                         ?>
+                        
+                      
+                    </select>
+                    </div>
+               </div>
+              <div class="row">
+
+                <div class="col-xs-6 col-md-6 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Color" type="color" required/>
+                    </div>
+                    <div class="col-xs-6 col-md-6 form-group">
+                    <select class="form-control" id="manufacturer_list" placeholder= "Select Manufacturering Year">
+                        <option>Select Manufacturing Year</option>
+                        <?php 
+                            foreach(range(1950, (int)date("Y")) as $year) 
+                            {
+                                         echo "\t<option value='".$year."'>".$year."</option>\n\r";
+                            }
+
+                        ?>
+                    </select>
+                    </div>
+            
+              </div>
+               <div class="row">
+
+                <div class="col-xs-6 col-md-6 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Registration Number" type="text" required/>
+                    </div>
+                    <div class="col-xs-6 col-md-6 form-group">
+                    <textarea rows="3" class="form-control" id="notes" placeholder="Notes"></textarea>
+                    </div>
+            
+              </div>
       </div>
           <div class="modal-footer ">
         <button type="button" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
